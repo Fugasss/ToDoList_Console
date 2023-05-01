@@ -2,29 +2,27 @@
 
 void ToDo::Run()
 {
-	_view.render("!Welcome To ToDoList!");
-	help();
-
 	bool close = false;
 	string command;
 	string buffer;
 
 	while (!close)
 	{
-		getline(cin, command);
-		
-		if (command == _commands[0]) 
-		{
-			help();
-		}
-		else if (command == _commands[1]) 
+		help(false);
+		show(false);
+
+		cin >> command;
+
+		trim(command);
+
+		if (command == _commands[0])
 		{
 			_view.render("Enter task to save");
 
 			getline(cin, buffer);
 			add(buffer);
 		}
-		else if(command == _commands[2])
+		else if (command == _commands[1])
 		{
 			_view.render("Enter task number to remove");
 
@@ -33,38 +31,49 @@ void ToDo::Run()
 
 			remove(id);
 		}
-		else if (command == _commands[3])
+		else if (command == _commands[2])
 		{
-			show();
+			_view.render("Enter task number to mark as completed");
+
+			int id = 0;
+			cin >> id;
+
+			complete(id);
 		}
-		else if (command == _commands[4])
+		else if (command == _commands[3])
 		{
 			close = true;
 		}
 	}
 }
 
-void ToDo::help()
+void ToDo::help(bool clear)
 {
-	_view.render("~~~Allowed Commands~~~");
+	_view.render("~~~Allowed Commands~~~", clear);
 
 	int i = 0;
 	for (auto it = _commands.begin(); it != _commands.end(); ++it, ++i)
 	{
-		_view.render("\t" + (*it));
+		_view.render(" " + (*it));
 	}
 }
 
-void ToDo::show()
+void ToDo::show(bool clear)
 {
 	vector<TaskData> data{};
 	_dbProvider.loadAll(&data);
 
-	_view.render(data);
+	_view.render(data, clear);
+}
+
+void ToDo::complete(int taskNumber)
+{
+	_dbProvider.complete(taskNumber);
 }
 
 void ToDo::add(string task)
 {
+
 	_dbProvider.save(task);
 }
 

@@ -22,9 +22,12 @@ public:
 		}
 
 		//Create SQL DB if not exists
-		const char* sql = "CREATE TABLE IF NOT EXISTS TASKS ("\
-			"TASK			TEXT						NOT NULL,"\
-			"ISCLOSED		NUMBER(1)					NOT NULL);";
+		const char* sql =	"CREATE TABLE IF NOT EXISTS TASKS ("\
+							"ID	INTEGER NOT NULL UNIQUE," \
+							"TASK	TEXT NOT NULL, "\
+							"ISCLOSED	NUMBER(1) NOT NULL,"\
+							"PRIMARY KEY('ID' AUTOINCREMENT)"\
+							");";
 
 		sqlite3_stmt* stmt;
 		result = sqlite3_prepare_v2(_db, sql, -1, &stmt, NULL);
@@ -40,11 +43,9 @@ public:
 
 	void save(string str);
 	void remove(int id);
+	void complete(int id);
 	void loadAll(vector<TaskData>*);
-	void load(int id, TaskData*);
 
 private:
 	sqlite3* _db;
-
-	//static int get_callback(void*, int, char**, char**);
 };

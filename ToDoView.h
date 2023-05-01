@@ -10,12 +10,10 @@ using namespace std;
 class ToDoView
 {
 public:
-	ToDoView() 
+	ToDoView()
 	{
-
 	}
 
 	void render(string, bool clear = false);
 	void render(vector<TaskData> tasks, bool clear = false);
 };
-

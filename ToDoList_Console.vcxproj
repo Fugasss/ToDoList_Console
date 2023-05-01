@@ -138,6 +138,7 @@
     <ClInclude Include="DbProvider.h" />
     <ClInclude Include="plugins\sqlite3\sqlite3.h" />
     <ClInclude Include="plugins\sqlite3\sqlite3ext.h" />
+    <ClInclude Include="StringExtension.h" />
     <ClInclude Include="TaskData.h" />
     <ClInclude Include="ToDo.h" />
     <ClInclude Include="ToDoView.h" />

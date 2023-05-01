@@ -5,6 +5,8 @@
 #include "ToDoView.h"
 #include "plugins/sqlite3/sqlite3.h"
 #include "DbProvider.h"
+#include "StringExtension.h"
+
 
 using namespace std;
 
@@ -25,16 +27,15 @@ private:
 
 	const vector<string> _commands =
 	{
-		"help",
 		"add",
 		"remove",
-		"show",
+		"complete",
 		"close"
 	};
 
-	void help();
-	void show();
+	void help(bool clear);
+	void show(bool clear);
+	void complete(int taskNumber);
 	void add(string task);
 	void remove(int taskNumber);
-
 };
