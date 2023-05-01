@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+#sql db
+*.db
+
+#visual studio cache
+.vs/
+
+#builds
+x64/
+x32/
+build/
+builds/
